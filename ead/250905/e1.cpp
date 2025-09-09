@@ -23,11 +23,7 @@ void swap(int * a, int * b) {
 
 
 void rotaciona (int arr[], int tam){
-	swap(arr[0], arr[tam - 1]);
-	for (int i = 1; i < tam -1; i++) {
-		cout << i << " > " << (i -1) % tam << endl ;
-		swap(arr[i], arr[(i - 1) % tam]);
-	}
+	
 }
 
 int main (){
