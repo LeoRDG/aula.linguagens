@@ -9,39 +9,43 @@
 
 using namespace std;
 
-// 1 4  0, 3
-// 2 1  1, 0
-// 3 2  2, 1
-// 4 3  3, 2
-
-
 void swap(int * a, int * b) {
+    // troca os valores de um endereço para o outro
 	int temp = * a;
 	*a = *b;
 	*b = temp;
 }
 
+void inverte (int arr[], int tam, int inicio) {
+    // inverte as posições dos elementos de um array
+    int meio = (tam - inicio) / 2 + inicio;
+	for (int i = inicio; i < meio; i++){
+        int i_inverso = tam - i - 1 + inicio;
+		swap(arr[i], arr[i_inverso]);
+	}
+}
 
 void rotaciona (int arr[], int tam){
-	
+    // inverte o array inteiro e depois inverte o array começando do index 1
+	inverte(arr, tam, 0);
+    inverte(arr, tam, 1);
 }
 
 int main (){
-    int tamanho = 4;
+    // inicia o array
+    int tamanho = 10, val;
     int array[tamanho];
-    int val;
-
     for (int i = 0; i < tamanho; i++) {
-        cout << "Digite um valor (" << i+1 << "/10) : ";
+        cout << "Digite um valor (" << i+1 << "/"<< tamanho <<") : ";
         cin >> val;
         array[i] = val;
     }
     
     rotaciona(array, tamanho);
 
-    for (int i : array) {
-        cout << i << endl;
-    }
+    // exibe o array rotacionado
+    for (int i : array) cout << i << " ";
+    cout << endl;
 
     return 0;
 }
