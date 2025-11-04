@@ -7,6 +7,7 @@
 
 using namespace std;
 
+
 struct Tarefa{
     string descricao, categoria;
     int prioridade;
@@ -17,6 +18,9 @@ struct Tarefa{
         << prioridade << "\n";
     }
 };
+
+vector<Tarefa> tarefas;
+int resposta;
 
 vector<Tarefa> carregar(){
     string linha;
@@ -43,35 +47,57 @@ vector<Tarefa> carregar(){
     return tarefas;
 }
 
+void salvar(){
+    for (auto t : tarefas){
+        ofstream File("tarefas.csv");
+
+        File << t.descricao << ","
+        << t.categoria << ","
+        << t.prioridade;
+        
+
+        
+        File.close();
+    }
+}
+
+void mostrar_menu(){
+    system("cls");
+
+    cout << "1 - Carregar Toda Lista\n"
+    << "2 - Adicionar Tarefa\n"
+    << "3 - Mostrar Tarefa\n"
+    << "4 - Criar Tarefa\n";
+
+    cout << "\nDigite um numero\n";
+    cin >> resposta;
+
+    switch (resposta) {
+        case 1:
+            tarefas = carregar();
+            break;
+        case 2:
+            break;
+        case 3:
+            cout << "\nDigite um numero\n";
+            cin >> resposta;
+            if (resposta < tarefas.size() && resposta >= 0)
+            tarefas[resposta].show();
+            cout << "\n";
+            break;
+        default:
+            break;
+    }
+    system("pause");
+}
+
+void mostrar_todas(){
+
+}
 
 int main(){
-    int resposta;
-    vector<Tarefa> tarefas;
-
     while (true) {
-        cout << "1 - Carregar Toda Lista\n"
-        << "2 - Adicionar Tarefa\n"
-        << "3 - Mostrar Tarefa\n";
-
-        cout << "\nDigite um numero\n";
-        cin >> resposta;
-
-        switch (resposta) {
-            case 1:
-                tarefas = carregar();
-                break;
-            case 2:
-                break;
-            case 3:
-                cout << "\nDigite um numero\n";
-                cin >> resposta;
-                if (resposta < tarefas.size() && resposta >= 0)
-                tarefas[resposta].show();
-                cout << "\n";
-                break;
-            default:
-                break;
-        }
+        mostrar_menu();
     }
 
     return (0);
